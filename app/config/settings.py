@@ -246,8 +246,8 @@ LOGGING = {
 }
 
 UNFOLD = {
-    "SITE_TITLE": 'CRM',
-    "SITE_HEADER": "CRM",
+    "SITE_TITLE": 'As-Safa',
+    "SITE_HEADER": "As-Safa",
     "SITE_URL": "/",
     "SITE_SYMBOL": "settings",
     "SHOW_HISTORY": True,
