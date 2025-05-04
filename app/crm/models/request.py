@@ -1,20 +1,8 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 
-REQUEST_STATUSES = (
-    ('new', 'Новый'),
-    ('specialist_review', 'На проверке у специалиста'),
-    ('approved_by_specialist', 'Одобрено специалистом'),
-    ('director_review', 'На рассмотрении у Генерального директора'),
-    ('rejected_by_director', 'Отклонено директором'),
-    ('approved_by_director', 'Одобрено директором'),
-    ('chairman_review', 'На рассмотрении у председателя'),
-    ('rejected_by_chairman', 'Отклонено председателем'),
-    ('approved_by_chairman', 'Одобрено председателем'),
-    ('awaiting_payment', 'Ожидает выплаты'),
-    ('paid', 'Выплачено'),
-    ('payment_pending', 'Выплата в ожидании'),
-)
+from config.settings import REQUEST_STATUSES
+
 
 class Request(models.Model):
     SUBJECT_TYPES = (
@@ -25,8 +13,8 @@ class Request(models.Model):
     subject_type = models.CharField("Тип субъекта", max_length=20, choices=SUBJECT_TYPES)
     full_name_or_org = models.CharField("ФИО или название учреждения", max_length=255)
     phone_number = models.CharField("Номер телефона", max_length=20)
-    actual_address = models.TextField("Фактический адрес")
-    registration_address = models.TextField("Адрес прописки")
+    actual_address = models.CharField("Фактический адрес", max_length=255)
+    registration_address = models.CharField("Адрес прописки", max_length=255)
     description = models.TextField("Описание ситуации / комментарий")
     incoming_letter = models.FileField("Входящее письмо", upload_to='letters/', blank=True, null=True)
     requested_amount = models.DecimalField("Запрашиваемая сумма", max_digits=12, decimal_places=2)

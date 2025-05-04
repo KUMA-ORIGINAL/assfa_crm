@@ -1,10 +1,10 @@
 from pathlib import Path
 
 import environ
-from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from import_export.formats.base_formats import XLSX
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -245,6 +245,21 @@ LOGGING = {
     },
 }
 
+REQUEST_STATUSES = (
+    ('new', 'Новый'),
+    ('specialist_review', 'На проверке у специалиста'),
+    ('approved_by_specialist', 'Одобрено специалистом'),
+    ('director_review', 'На рассмотрении у директора'),
+    ('rejected_by_director', 'Отклонено директором'),
+    ('approved_by_director', 'Одобрено директором'),
+    ('chairman_review', 'На рассмотрении у председателя'),
+    ('rejected_by_chairman', 'Отклонено председателем'),
+    ('approved_by_chairman', 'Одобрено председателем'),
+    ('awaiting_payment', 'Ожидает выплаты'),
+    ('paid', 'Выплачено'),
+    ('payment_pending', 'Выплата в ожидании'),
+)
+
 UNFOLD = {
     "SITE_TITLE": 'As-Safa',
     "SITE_HEADER": "As-Safa",
@@ -290,6 +305,30 @@ UNFOLD = {
             "important-dark": "var(--color-base-100)",  # text-base-100
         },
     },
+    "TABS": [
+        {
+            "page": "requests",
+            "models": ["crm.request"],
+            "items": [
+                {
+                    "title": _("Все заявки"),
+                    "link": reverse_lazy("admin:crm_request_changelist"),
+                    "active": lambda request: (
+                        request.path == reverse_lazy("admin:crm_request_changelist")
+                        and "status__exact" not in request.GET
+                    ),
+                },
+                *[
+                    {
+                        "title": label,
+                        "link": lambda request, status=status: f"{reverse_lazy('admin:crm_request_changelist')}?status__exact={status}",
+                        "active": lambda request, status=status: request.GET.get("status__exact") == status,
+                    }
+                    for status, label in REQUEST_STATUSES
+                ]
+            ],
+        },
+    ],
     "SIDEBAR": {
         "show_search": False,
         "show_all_applications": False,
