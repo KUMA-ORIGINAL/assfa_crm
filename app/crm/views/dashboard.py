@@ -1,3 +1,4 @@
+import copy
 import json
 from datetime import timedelta
 
@@ -39,6 +40,30 @@ def dashboard_callback(request, context):
     amount_data = {item["day"].strftime("%Y-%m-%d"): float(item["total"] or 0) for item in amount_qs}
     amounts = [amount_data.get(date, 0) for date in labels]
 
+    chart_options = {
+        "responsive": True,
+        "maintainAspectRatio": False,
+        "scales": {
+            "y": {
+                "beginAtZero": True,
+                "ticks": {
+                    "stepSize": 1,
+                },
+            },
+        },
+        "plugins": {
+            "legend": {
+                "display": False
+            },
+            "tooltip": {
+                "enabled": True
+            }
+        },
+    }
+
+    chart_options_2 = copy.deepcopy(chart_options)
+    chart_options_2["scales"]["y"]['ticks'] = {}
+
     context.update({
         "performance": [
             {
@@ -53,6 +78,7 @@ def dashboard_callback(request, context):
                         }
                     ],
                 }),
+                "options": json.dumps(chart_options),
             },
             {
                 "title": _("Запрошено средств за неделю"),
@@ -66,6 +92,7 @@ def dashboard_callback(request, context):
                         }
                     ],
                 }),
+                "options": json.dumps(chart_options_2),
             },
         ]
     })

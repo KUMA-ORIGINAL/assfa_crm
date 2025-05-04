@@ -34,7 +34,7 @@
                     </div>
                 {% endif %}
 
-                {% component "unfold/components/chart/line.html" with data=stats.chart %}{% endcomponent %}
+                {% component "unfold/components/chart/line.html" with data=stats.chart options=stats.options %}{% endcomponent %}
             {% endcomponent %}
         {% endfor %}
     </div>
