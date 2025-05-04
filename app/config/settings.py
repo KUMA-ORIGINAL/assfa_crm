@@ -253,6 +253,7 @@ UNFOLD = {
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "BORDER_RADIUS": "6px",
+    "DASHBOARD_CALLBACK": "crm.views.dashboard_callback",
     "COLORS": {
         "base": {
             "50": "249 250 251",
@@ -294,10 +295,14 @@ UNFOLD = {
         "show_all_applications": False,
         "navigation": [
             {
-                "title": _("Заявки"),
-                "separator": True,
+                "title": _("Навигация"),
                 "collapsible": False,
                 "items": [
+                    {
+                        "title": _("Dashboard"),
+                        "icon": "dashboard",
+                        "link": reverse_lazy("admin:index"),
+                    },
                     {
                         "title": _("Список заявок"),
                         "icon": "description",  # или любой другой подходящий икон

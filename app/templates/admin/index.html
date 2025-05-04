@@ -1,0 +1,41 @@
+{% extends 'unfold/layouts/base_simple.html' %}
+
+{% load i18n unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    {% if subtitle %}
+        {{ subtitle }} |
+    {% endif %}
+
+    {{ title }} | {{ site_title|default:_('Django site admin') }}
+{% endblock %}
+
+{% block branding %}
+    {% include "unfold/helpers/site_branding.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-6">
+        {% for stats in performance %}
+            {% component "unfold/components/card.html" %}
+                {% component "unfold/components/text.html" %}
+                    {{ stats.title }}
+                {% endcomponent %}
+
+                {% component "unfold/components/title.html" with class="mb-6" %}
+                    {{ stats.metric }}
+                {% endcomponent %}
+
+                {% if stats.footer %}
+                    <div class="text-sm text-muted mb-4">
+                        {{ stats.footer|safe }}
+                    </div>
+                {% endif %}
+
+                {% component "unfold/components/chart/line.html" with data=stats.chart %}{% endcomponent %}
+            {% endcomponent %}
+        {% endfor %}
+    </div>
+{% endblock %}
