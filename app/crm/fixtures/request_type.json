@@ -1,0 +1,29 @@
+[
+  {
+    "model": "crm.requesttype",
+    "pk": 1,
+    "fields": {
+      "name": "Медицинская помощь",
+      "description": "Запрос на оплату лечения, медикаментов и т.п.",
+      "is_active": true
+    }
+  },
+  {
+    "model": "crm.requesttype",
+    "pk": 2,
+    "fields": {
+      "name": "Материальная помощь",
+      "description": "Финансовая поддержка в трудной жизненной ситуации",
+      "is_active": true
+    }
+  },
+  {
+    "model": "crm.requesttype",
+    "pk": 3,
+    "fields": {
+      "name": "Помощь организациям",
+      "description": "Поддержка учреждений и сообществ",
+      "is_active": true
+    }
+  }
+]

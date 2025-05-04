@@ -1,0 +1,97 @@
+[
+  {
+    "model": "crm.user",
+    "pk": 1,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Админ",
+      "last_name": "Главный",
+      "patronymic": "Сергеевич",
+      "email": "admin@example.com",
+      "role": "director",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-01T10:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "crm.user",
+    "pk": 2,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Ирина",
+      "last_name": "Специалист",
+      "patronymic": "Андреевна",
+      "email": "specialist@example.com",
+      "role": "specialist",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-01T11:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "crm.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$example$2+fakedpasswordhash==",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Олег",
+      "last_name": "Директор",
+      "patronymic": "Иванович",
+      "email": "director@example.com",
+      "role": "director",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-01T12:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "crm.user",
+    "pk": 4,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Ахмад",
+      "last_name": "Председатель",
+      "patronymic": "Шейхович",
+      "email": "chairman@example.com",
+      "role": "chairman",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-01T13:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "crm.user",
+    "pk": 5,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "Марина",
+      "last_name": "Бухгалтер",
+      "patronymic": "Петровна",
+      "email": "accountant@example.com",
+      "role": "accountant",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-05-01T14:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

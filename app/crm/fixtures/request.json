@@ -1,0 +1,212 @@
+[
+ {
+    "model": "crm.request",
+    "pk": 1,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Иванов Иван Иванович",
+      "phone_number": "+7 900 123-45-67",
+      "actual_address": "Москва, ул. Ленина, д. 1",
+      "registration_address": "Москва, ул. Ленина, д. 1",
+      "request_type": 1,
+      "description": "Нужна помощь на лечение после операции.",
+      "incoming_letter": null,
+      "requested_amount": "50000.00",
+      "approved_amount_director": "30000.00",
+      "approved_amount_chairman": null,
+      "status": "approved_by_director",
+      "created_at": "2025-05-01T10:00:00Z",
+      "updated_at": "2025-05-01T10:10:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 2,
+    "fields": {
+      "subject_type": "organization",
+      "full_name_or_org": "Центр социальной поддержки",
+      "phone_number": "+7 901 234-56-78",
+      "actual_address": "Казань, ул. Победы, д. 10",
+      "registration_address": "Казань, ул. Победы, д. 10",
+      "request_type": 3,
+      "description": "Запрос на помощь в закупке одежды для малоимущих.",
+      "incoming_letter": null,
+      "requested_amount": "120000.00",
+      "approved_amount_director": "100000.00",
+      "approved_amount_chairman": "100000.00",
+      "status": "paid",
+      "created_at": "2025-04-25T09:30:00Z",
+      "updated_at": "2025-04-30T16:00:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 3,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Петрова Мария Сергеевна",
+      "phone_number": "+7 902 345-67-89",
+      "actual_address": "Новосибирск, ул. Кирова, д. 5",
+      "registration_address": "Новосибирск, ул. Кирова, д. 5",
+      "request_type": 2,
+      "description": "Потеря работы, просит временную материальную помощь.",
+      "incoming_letter": null,
+      "requested_amount": "20000.00",
+      "approved_amount_director": null,
+      "approved_amount_chairman": null,
+      "status": "specialist_review",
+      "created_at": "2025-05-02T12:00:00Z",
+      "updated_at": "2025-05-02T12:30:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 4,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Сидоров Алексей",
+      "phone_number": "+7 903 456-78-90",
+      "actual_address": "Екатеринбург, ул. Мира, д. 3",
+      "registration_address": "Екатеринбург, ул. Мира, д. 3",
+      "request_type": 1,
+      "description": "Необходима операция ребенку.",
+      "incoming_letter": null,
+      "requested_amount": "150000.00",
+      "approved_amount_director": "100000.00",
+      "approved_amount_chairman": null,
+      "status": "director_review",
+      "created_at": "2025-04-29T14:00:00Z",
+      "updated_at": "2025-04-29T15:00:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 5,
+    "fields": {
+      "subject_type": "organization",
+      "full_name_or_org": "Школа №123",
+      "phone_number": "+7 904 567-89-01",
+      "actual_address": "Уфа, ул. Школьная, д. 12",
+      "registration_address": "Уфа, ул. Школьная, д. 12",
+      "request_type": 3,
+      "description": "Запрос на обновление оборудования.",
+      "incoming_letter": null,
+      "requested_amount": "300000.00",
+      "approved_amount_director": null,
+      "approved_amount_chairman": null,
+      "status": "new",
+      "created_at": "2025-05-03T08:00:00Z",
+      "updated_at": "2025-05-03T08:00:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 6,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Кузнецова Ольга",
+      "phone_number": "+7 905 678-90-12",
+      "actual_address": "Омск, ул. Красная, д. 4",
+      "registration_address": "Омск, ул. Красная, д. 4",
+      "request_type": 2,
+      "description": "Мать-одиночка, просит поддержку.",
+      "incoming_letter": null,
+      "requested_amount": "25000.00",
+      "approved_amount_director": "20000.00",
+      "approved_amount_chairman": null,
+      "status": "approved_by_director",
+      "created_at": "2025-04-28T10:15:00Z",
+      "updated_at": "2025-04-28T10:45:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 7,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Морозов Дмитрий",
+      "phone_number": "+7 906 789-01-23",
+      "actual_address": "Томск, ул. Науки, д. 7",
+      "registration_address": "Томск, ул. Науки, д. 7",
+      "request_type": 1,
+      "description": "Пожилой человек, требуется лечение.",
+      "incoming_letter": null,
+      "requested_amount": "40000.00",
+      "approved_amount_director": "40000.00",
+      "approved_amount_chairman": null,
+      "status": "awaiting_payment",
+      "created_at": "2025-04-27T11:00:00Z",
+      "updated_at": "2025-04-27T11:30:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 8,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Лебедева Анна",
+      "phone_number": "+7 907 890-12-34",
+      "actual_address": "Кемерово, ул. Советская, д. 9",
+      "registration_address": "Кемерово, ул. Советская, д. 9",
+      "request_type": 2,
+      "description": "Семья с ребенком-инвалидом, нужна поддержка.",
+      "incoming_letter": null,
+      "requested_amount": "60000.00",
+      "approved_amount_director": "50000.00",
+      "approved_amount_chairman": "50000.00",
+      "status": "paid",
+      "created_at": "2025-04-26T09:00:00Z",
+      "updated_at": "2025-04-26T09:30:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 9,
+    "fields": {
+      "subject_type": "organization",
+      "full_name_or_org": "Детский дом \"Надежда\"",
+      "phone_number": "+7 908 901-23-45",
+      "actual_address": "Воронеж, ул. Лесная, д. 22",
+      "registration_address": "Воронеж, ул. Лесная, д. 22",
+      "request_type": 3,
+      "description": "Просьба о финансировании ремонта помещений.",
+      "incoming_letter": null,
+      "requested_amount": "500000.00",
+      "approved_amount_director": "400000.00",
+      "approved_amount_chairman": "400000.00",
+      "status": "payment_pending",
+      "created_at": "2025-04-20T08:00:00Z",
+      "updated_at": "2025-04-20T08:45:00Z",
+      "attachments": null
+    }
+  },
+  {
+    "model": "crm.request",
+    "pk": 10,
+    "fields": {
+      "subject_type": "individual",
+      "full_name_or_org": "Григорьев Николай",
+      "phone_number": "+7 909 012-34-56",
+      "actual_address": "Пермь, ул. Центральная, д. 6",
+      "registration_address": "Пермь, ул. Центральная, д. 6",
+      "request_type": 1,
+      "description": "Пострадавший в ДТП, нуждается в лечении.",
+      "incoming_letter": null,
+      "requested_amount": "70000.00",
+      "approved_amount_director": null,
+      "approved_amount_chairman": null,
+      "status": "new",
+      "created_at": "2025-05-04T10:00:00Z",
+      "updated_at": "2025-05-04T10:00:00Z",
+      "attachments": null
+    }
+  }
+]
