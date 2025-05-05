@@ -246,18 +246,16 @@ LOGGING = {
 }
 
 REQUEST_STATUSES = (
-    ('new', 'Новый'),
-    ('specialist_review', 'На проверке у специалиста'),
+    ('new', 'Новая'),
     ('approved_by_specialist', 'Одобрено специалистом'),
-    ('director_review', 'На рассмотрении у директора'),
-    ('rejected_by_director', 'Отклонено директором'),
+    ('rejected_by_specialist', 'Отклонено специалистом'),  # ❗ рекомендуется добавить
     ('approved_by_director', 'Одобрено директором'),
-    ('chairman_review', 'На рассмотрении у председателя'),
-    ('rejected_by_chairman', 'Отклонено председателем'),
+    ('rejected_by_director', 'Отклонено директором'),
+    ('sent_to_chairman', 'Направлено председателю'),
     ('approved_by_chairman', 'Одобрено председателем'),
+    ('rejected_by_chairman', 'Отклонено председателем'),
     ('awaiting_payment', 'Ожидает выплаты'),
     ('paid', 'Выплачено'),
-    ('payment_pending', 'Выплата в ожидании'),
 )
 
 UNFOLD = {
