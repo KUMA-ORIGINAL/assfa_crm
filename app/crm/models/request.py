@@ -17,6 +17,7 @@ class Request(models.Model):
     registration_address = models.CharField("Адрес прописки", max_length=255)
     description = models.TextField("Описание ситуации / комментарий")
     incoming_letter = models.FileField("Входящее письмо", upload_to='letters/', blank=True, null=True)
+    requisites = models.CharField("Реквизиты", blank=True, null=True)
     requested_amount = models.DecimalField("Запрашиваемая сумма", max_digits=12, decimal_places=2)
     approved_amount_director = models.DecimalField("Сумма, одобренная директором", max_digits=12, decimal_places=2, null=True, blank=True)
     approved_amount_chairman = models.DecimalField("Сумма, одобренная председателем", max_digits=12, decimal_places=2, null=True, blank=True)

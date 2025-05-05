@@ -71,6 +71,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         }),
         ("Финансовая информация", {
             'fields': (
+                'requisites',
                 'requested_amount',
                 'approved_amount_director',
                 'approved_amount_chairman',
@@ -101,6 +102,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
             'registration_address',
             'description',
             'incoming_letter',
+            'requisites',
             'requested_amount',
             'request_type',
             'status',
