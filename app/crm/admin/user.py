@@ -9,7 +9,7 @@ from unfold.forms import AdminPasswordChangeForm, UserChangeForm as BaseUserChan
     UnfoldReadOnlyPasswordHashWidget
 
 from common.admin import BaseModelAdmin
-from ..models import User
+from ..models import User, ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT
 
 admin.site.unregister(Group)
 
@@ -102,6 +102,10 @@ class UserAdmin(UserAdmin, BaseModelAdmin):
                 ),
             }),
         ]
+        if request.user.is_superuser:
+            pass
+        elif request.user.role in (ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT):
+            fieldsets = [fs for fs in fieldsets if fs[0] != 'Права доступа']
         return fieldsets
 
     def get_queryset(self, request):

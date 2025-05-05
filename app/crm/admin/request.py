@@ -12,7 +12,6 @@ from simple_history.admin import SimpleHistoryAdmin
 from unfold.contrib.filters.admin import RangeDateTimeFilter, ChoicesDropdownFilter, RelatedDropdownFilter
 from unfold.contrib.import_export.forms import ExportForm
 from unfold.decorators import action
-from unfold.widgets import UnfoldAdminTextInputWidget
 
 from common.admin import BaseModelAdmin
 from ..models import Request, ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT
@@ -48,6 +47,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         "mark_as_awaiting_payment",
         "mark_as_paid",
     ]
+    history_list_display = ["status"]
 
     list_filter_submit = True
     search_fields = ('full_name_or_org', 'phone_number', 'description')
@@ -92,41 +92,31 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_superuser:
             return self.readonly_fields
-        elif request.user.role in (ROLE_SPECIALIST,):
-            return [
-                'subject_type',
-                'full_name_or_org',
-                'phone_number',
-                'actual_address',
-                'registration_address',
-                'description',
-                'incoming_letter',
-                'requested_amount',
-                'approved_amount_director',
-                'approved_amount_chairman',
-                'request_type',
-                'status',
-                'created_at',
-                'updated_at',
-                'attachments',
-            ]
-        elif request.user.role in (ROLE_DIRECTOR,):
-            return [
-                'subject_type',
-                'full_name_or_org',
-                'phone_number',
-                'actual_address',
-                'registration_address',
-                'description',
-                'incoming_letter',
-                'requested_amount',
-                'approved_amount_chairman',
-                'request_type',
-                'status',
-                'created_at',
-                'updated_at',
-                'attachments',
-            ]
+
+        base_fields = [
+            'subject_type',
+            'full_name_or_org',
+            'phone_number',
+            'actual_address',
+            'registration_address',
+            'description',
+            'incoming_letter',
+            'requested_amount',
+            'request_type',
+            'status',
+            'created_at',
+            'updated_at',
+            'attachments',
+        ]
+
+        if request.user.role in (ROLE_SPECIALIST, ROLE_ACCOUNTANT):
+            return base_fields + ['approved_amount_director', 'approved_amount_chairman']
+        elif request.user.role == ROLE_DIRECTOR:
+            return base_fields + ['approved_amount_chairman']
+        elif request.user.role == ROLE_CHAIRMAN:  # Пример на случай, если вы хотели добавить ещё одну роль
+            return base_fields + ['approved_amount_director']
+
+        return base_fields  # По умолчанию — можно оставить только базовые поля
 
     @action(
         description=_("✅ Одобрить (Специалист)"),
