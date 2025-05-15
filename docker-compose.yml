@@ -15,6 +15,18 @@ services:
       redis:
         condition: service_healthy
 
+  bot:
+    build: app
+    command: python /app/run_bot.py
+    env_file:
+      - .env.dev
+    restart: always
+    volumes:
+      - ./app:/app
+    depends_on:
+      application:
+        condition: service_started
+
   database:
     image: postgres:16.2-alpine3.18
     env_file: .env.dev

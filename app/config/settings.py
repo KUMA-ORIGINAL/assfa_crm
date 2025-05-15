@@ -157,9 +157,18 @@ CSRF_TRUSTED_ORIGINS = [f"https://{DOMAIN}", f"http://{DOMAIN}"]
 
 AUTH_USER_MODEL = 'crm.User'
 
+TG_BOT_TOKEN = env('TG_BOT_TOKEN')
+
 if DEBUG:
     INSTALLED_APPS += ['silk']
     MIDDLEWARE.insert(0, 'silk.middleware.SilkyMiddleware')
+
+CACHALOT_ENABLED = True
+CACHALOT_TIMEOUT = 60 * 60
+CACHALOT_ONLY_CACHABLE_TABLES = (
+    'crm_request',
+    'crm_requesttype',
+)
 
 CACHES = {
     'default': {
@@ -171,11 +180,6 @@ CACHES = {
     }
 }
 
-CACHALOT_ENABLED = True
-CACHALOT_TIMEOUT = 60 * 60
-
-# CACHALOT_ONLY_CACHABLE_TABLES = {
-# }
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'CRM',

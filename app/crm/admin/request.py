@@ -16,6 +16,7 @@ from unfold.decorators import action
 from common.admin import BaseModelAdmin
 from ..models import Request, ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT
 from ..resources import RequestResource
+from ..services.notifications import notify_status_change
 
 
 @admin.register(Request)
@@ -129,6 +130,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         obj = self.model.objects.get(pk=object_id)
         obj.status = 'approved_by_specialist'
         obj.save()
+        notify_status_change(role=ROLE_DIRECTOR, request_obj=obj, new_status=obj.get_status_display())
         messages.success(request, _("Заявка одобрена специалистом."))
         return redirect(reverse_lazy("admin:crm_request_change", args=[object_id]))
 

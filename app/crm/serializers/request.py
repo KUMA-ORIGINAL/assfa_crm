@@ -14,6 +14,7 @@ class RequestSerializer(serializers.ModelSerializer):
             "registration_address",
             "description",
             "incoming_letter",
+            'requisites',
             "requested_amount",
             "approved_amount_director",
             "approved_amount_chairman",

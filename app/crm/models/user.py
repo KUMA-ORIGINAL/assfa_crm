@@ -75,6 +75,9 @@ class User(AbstractUser):
         blank=True,
         verbose_name='Роль'
     )
+    tg_phone_number = models.CharField("Телефон Telegram", max_length=20, blank=True, null=True,
+                                       help_text='Заполните без +, например: 996111222333')
+    tg_chat_id = models.CharField("Telegram Chat ID", max_length=50, blank=True, null=True)
 
     username = None
     USERNAME_FIELD = "email"

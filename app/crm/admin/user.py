@@ -101,6 +101,11 @@ class UserAdmin(UserAdmin, BaseModelAdmin):
                     "first_name", "last_name", "patronymic", "role",
                 ),
             }),
+            ("Telegram", {
+                "fields": (
+                    'tg_phone_number', 'tg_chat_id'
+                ),
+            }),
         ]
         if request.user.is_superuser:
             pass

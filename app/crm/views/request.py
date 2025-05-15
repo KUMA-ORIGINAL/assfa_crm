@@ -3,6 +3,7 @@ from crm.models import Request
 from crm.serializers import RequestSerializer
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
+
 @extend_schema(tags=['request'])
 @extend_schema_view(
     create=extend_schema(
