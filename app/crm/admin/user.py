@@ -77,7 +77,7 @@ class UserAdmin(UserAdmin, BaseModelAdmin):
         return list_filter
 
     def get_list_display(self, request):
-        list_display = ('id', 'email', 'first_name', 'last_name', 'role', 'detail_link')
+        list_display = ('id', 'email', 'first_name', 'last_name', 'role', 'tg_phone_number', 'detail_link')
         if request.user.is_superuser:
             pass
         return list_display
