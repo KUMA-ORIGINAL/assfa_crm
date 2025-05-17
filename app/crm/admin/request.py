@@ -213,6 +213,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         obj = self.model.objects.get(pk=object_id)
         obj.status = 'approved_by_director'
         obj.save()
+        notify_status_change(role=ROLE_ACCOUNTANT, request_obj=obj, new_status=obj.get_status_display())
         messages.success(request, _("Заявка одобрена директором."))
         return redirect(reverse_lazy("admin:crm_request_change", args=[object_id]))
 
@@ -243,6 +244,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         obj = self.model.objects.get(pk=object_id)
         obj.status = 'sent_to_chairman'
         obj.save()
+        notify_status_change(role=ROLE_CHAIRMAN, request_obj=obj, new_status=obj.get_status_display())
         messages.success(request, _("Заявка направлена председателю."))
         return redirect(reverse_lazy("admin:crm_request_change", args=[object_id]))
 
@@ -260,6 +262,7 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         obj = self.model.objects.get(pk=object_id)
         obj.status = 'approved_by_chairman'
         obj.save()
+        notify_status_change(role=ROLE_ACCOUNTANT, request_obj=obj, new_status=obj.get_status_display())
         messages.success(request, _("Заявка одобрена председателем."))
         return redirect(reverse_lazy("admin:crm_request_change", args=[object_id]))
 
