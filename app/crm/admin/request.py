@@ -1,8 +1,9 @@
 from typing import Union
+from urllib.parse import quote
 
 from django import forms
 from django.contrib import admin, messages
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -16,6 +17,7 @@ from unfold.decorators import action
 from common.admin import BaseModelAdmin
 from ..models import Request, ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT
 from ..resources import RequestResource
+from ..services.document_generate import fill_template_to_bytes
 from ..services.notifications import notify_status_change
 
 
@@ -47,7 +49,11 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
         "reject_chairman",
         "mark_as_awaiting_payment",
         "mark_as_paid",
+
+        'download_docx_action'
     ]
+    actions_row = ["download_docx_action"]
+
     history_list_display = ["status"]
 
     list_filter_submit = True
@@ -120,6 +126,40 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
             return base_fields + ['approved_amount_director']
 
         return base_fields  # По умолчанию — можно оставить только базовые поля
+
+    @action(
+        description=_("Скачать заявление"),
+        url_path="download-docx-action",
+    )
+    def download_docx_action(self, request, object_id: int):
+        obj = self.get_object(request, object_id)
+        if not obj:
+            self.message_user(request, "Заявка не найдена.", level='error')
+            return redirect(
+                reverse_lazy("admin:crm_request_changelist")  # исправьте app_label
+            )
+
+        data_to_fill = {
+            "[ФИО]": obj.full_name_or_org,
+            "[адрес]": obj.actual_address,
+            "[телефон]": obj.phone_number,
+            "[описание]": obj.description,
+            "[сумма]": f"{obj.requested_amount} сом",
+            "[реквизит]": obj.requisites or "",
+            "[дата и время]": obj.created_at.strftime("%d.%m.%Y"),
+        }
+
+        template_path = "static/Пример заявления.docx"
+        file_bytes = fill_template_to_bytes(template_path, data_to_fill)
+        filename = f"Заявление_{obj.id}.docx"
+        quoted_filename = quote(filename)
+
+        response = HttpResponse(
+            file_bytes,
+            content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        )
+        response['Content-Disposition'] = f"attachment; filename*=UTF-8''{quoted_filename}"
+        return response
 
     @action(
         description=_("✅ Одобрить (Специалист)"),
