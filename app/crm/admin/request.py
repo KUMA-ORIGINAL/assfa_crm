@@ -5,7 +5,7 @@ from django import forms
 from django.contrib import admin, messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ExportActionModelAdmin
@@ -15,6 +15,7 @@ from unfold.contrib.import_export.forms import ExportForm
 from unfold.decorators import action
 
 from common.admin import BaseModelAdmin
+from config.settings import REQUEST_STATUSES
 from ..models import Request, ROLE_SPECIALIST, ROLE_DIRECTOR, ROLE_CHAIRMAN, ROLE_ACCOUNTANT
 from ..resources import RequestResource
 from ..services.document_generate import fill_template_to_bytes
@@ -126,6 +127,29 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
             return base_fields + ['approved_amount_director']
 
         return base_fields  # По умолчанию — можно оставить только базовые поля
+
+    def changelist_view(self, request, extra_context=None):
+        user = request.user
+
+        # Проверяем, что фильтр не задан вручную
+        if "status__exact" not in request.GET:
+            # Определяем статус по роли
+            if user.role == ROLE_SPECIALIST:
+                status = 'new'
+            elif user.role == ROLE_DIRECTOR:
+                status = 'approved_by_specialist'
+            elif user.role == ROLE_CHAIRMAN:
+                status = 'sent_to_chairman'
+            else:
+                status = None
+
+            # Если статус определён, делаем редирект на нужный фильтр
+            if status:
+                url = f"{reverse('admin:crm_request_changelist')}?status__exact={status}"
+                return redirect(url)
+
+        # Иначе обычное поведение
+        return super().changelist_view(request, extra_context)
 
     @action(
         description=_("Скачать заявление"),
