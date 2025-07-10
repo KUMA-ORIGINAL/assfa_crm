@@ -4,10 +4,10 @@ from datetime import timedelta
 
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from django.utils.safestring import mark_safe
 from django.db.models.functions import TruncDay
 from django.db.models import Count, Sum
 
+from config.settings import REQUEST_STATUSES
 from crm.models import Request
 
 WEEKDAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
@@ -64,6 +64,21 @@ def dashboard_callback(request, context):
     chart_options_2 = copy.deepcopy(chart_options)
     chart_options_2["scales"]["y"]['ticks'] = {}
 
+    status_counts = (
+        Request.objects
+        .values('status')
+        .annotate(count=Count('id'))
+    )
+    status_dict = {item['status']: item['count'] for item in status_counts}
+    status_data = [
+        {
+            "code": code,
+            "title": title,
+            "count": status_dict.get(code, 0)
+        }
+        for code, title in REQUEST_STATUSES
+    ]
+
     context.update({
         "performance": [
             {
@@ -94,7 +109,8 @@ def dashboard_callback(request, context):
                 }),
                 "options": json.dumps(chart_options_2),
             },
-        ]
+        ],
+        "status_data": status_data,
     })
 
     return context
