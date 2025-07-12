@@ -141,6 +141,7 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
