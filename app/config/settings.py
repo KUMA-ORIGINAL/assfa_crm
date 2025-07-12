@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     "django.contrib.postgres",
 
@@ -143,15 +142,7 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
-
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
@@ -176,10 +167,10 @@ if DEBUG:
 
 CACHALOT_ENABLED = True
 CACHALOT_TIMEOUT = 60 * 60
-CACHALOT_ONLY_CACHABLE_TABLES = (
-    'crm_request',
-    'crm_requesttype',
-)
+# CACHALOT_ONLY_CACHABLE_TABLES = (
+#     'crm_request',
+#     'crm_requesttype',
+# )
 
 CACHES = {
     'default': {
