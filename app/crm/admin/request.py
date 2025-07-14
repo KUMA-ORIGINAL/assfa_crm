@@ -131,7 +131,6 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
     def changelist_view(self, request, extra_context=None):
         user = request.user
 
-        # Проверяем, что фильтр не задан вручную
         if "status__exact" not in request.GET:
             # Определяем статус по роли
             if user.role == ROLE_SPECIALIST:

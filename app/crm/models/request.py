@@ -22,7 +22,7 @@ class Request(models.Model):
     approved_amount_director = models.DecimalField("Сумма, одобренная директором", max_digits=12, decimal_places=2, null=True, blank=True)
     approved_amount_chairman = models.DecimalField("Сумма, одобренная председателем", max_digits=12, decimal_places=2, null=True, blank=True)
     request_type = models.ForeignKey('RequestType', verbose_name="Тип заявки", on_delete=models.SET_NULL, null=True)
-    status = models.CharField("Статус", max_length=50, choices=REQUEST_STATUSES, default='new')
+    status = models.CharField("Статус", max_length=50, choices=REQUEST_STATUSES, default='new', db_index=True)
     created_at = models.DateTimeField("Дата подачи", auto_now_add=True)
     updated_at = models.DateTimeField("Дата обновления", auto_now=True)
     attachments = models.FileField("Приложения", upload_to='attachments/', blank=True, null=True)
