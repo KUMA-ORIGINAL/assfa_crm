@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from import_export.formats.base_formats import XLSX
 
+from crm.admin_permissions import permission_callback_my_requests
+from crm.services import get_role_status
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -349,6 +351,21 @@ UNFOLD = {
                         "title": _("Список заявок"),
                         "icon": "description",  # или любой другой подходящий икон
                         "link": reverse_lazy("admin:crm_request_changelist"),
+                        "active": lambda request: "status__exact" not in request.GET,
+                    },
+                    {
+                        "title": _("Мои заявки"),
+                        "icon": 'article_person',
+                        "link": lambda request: (
+                            f"{reverse_lazy('admin:crm_request_changelist')}?status__exact={get_role_status(request.user)}"
+                            if get_role_status(request.user)
+                            else reverse_lazy('admin:crm_request_changelist')
+                        ),
+                        "active": lambda request: (
+                            request.get_full_path()
+                            == f"{reverse_lazy('admin:crm_request_changelist')}?status__exact={get_role_status(request.user)}"
+                        ),
+                        "permission": 'crm.admin_permissions.permission_callback_my_requests',
                     },
                     {
                         "title": _("Типы заявок"),

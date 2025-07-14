@@ -128,28 +128,6 @@ class RequestAdmin(SimpleHistoryAdmin, BaseModelAdmin, ExportActionModelAdmin):
 
         return base_fields  # По умолчанию — можно оставить только базовые поля
 
-    def changelist_view(self, request, extra_context=None):
-        user = request.user
-
-        if "status__exact" not in request.GET:
-            # Определяем статус по роли
-            if user.role == ROLE_SPECIALIST:
-                status = 'new'
-            elif user.role == ROLE_DIRECTOR:
-                status = 'approved_by_specialist'
-            elif user.role == ROLE_CHAIRMAN:
-                status = 'sent_to_chairman'
-            else:
-                status = None
-
-            # Если статус определён, делаем редирект на нужный фильтр
-            if status:
-                url = f"{reverse('admin:crm_request_changelist')}?status__exact={status}"
-                return redirect(url)
-
-        # Иначе обычное поведение
-        return super().changelist_view(request, extra_context)
-
     @action(
         description=_("Скачать заявление"),
         url_path="download-docx-action",
