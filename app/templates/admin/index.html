@@ -17,6 +17,22 @@
 {% endblock %}
 
 {% block content %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 mb-6">
+        {% for status in status_data %}
+            <div class="flex-shrink-0">
+                <div class="h-30 flex flex-col justify-center">
+                    {% component "unfold/components/card.html" %}
+                        {% component "unfold/components/text.html" with class="text-sm text-gray-600 dark:text-gray-400" %}
+                            {{ status.title }}
+                        {% endcomponent %}
+                        {% component "unfold/components/title.html" with class="text-2xl font-bold text-gray-900 dark:text-white mt-1" %}
+                            {{ status.count }}
+                        {% endcomponent %}
+                    {% endcomponent %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-6">
         {% for stats in performance %}
             {% component "unfold/components/card.html" %}
@@ -36,22 +52,6 @@
 
                 {% component "unfold/components/chart/line.html" with data=stats.chart options=stats.options %}{% endcomponent %}
             {% endcomponent %}
-        {% endfor %}
-    </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-4">
-        {% for status in status_data %}
-            <div class="flex-shrink-0">
-                <div class="h-30 flex flex-col justify-center">
-                    {% component "unfold/components/card.html" %}
-                        {% component "unfold/components/text.html" with class="text-sm text-gray-600 dark:text-gray-400" %}
-                            {{ status.title }}
-                        {% endcomponent %}
-                        {% component "unfold/components/title.html" with class="text-2xl font-bold text-gray-900 dark:text-white mt-1" %}
-                            {{ status.count }}
-                        {% endcomponent %}
-                    {% endcomponent %}
-                </div>
-            </div>
         {% endfor %}
     </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 import copy
 import json
+from collections import defaultdict
 from datetime import timedelta
 
 from django.utils.timezone import now
@@ -64,19 +65,43 @@ def dashboard_callback(request, context):
     chart_options_2 = copy.deepcopy(chart_options)
     chart_options_2["scales"]["y"]['ticks'] = {}
 
+    STATUS_CATEGORIES = {
+        'new': 'У специалиста',
+        'approved_by_specialist': 'У директора',
+        'rejected_by_specialist': 'Отклонено',
+        'approved_by_director': 'У бухгалтера',
+        'rejected_by_director': 'Отклонено',
+        'sent_to_chairman': 'У председателя',
+        'approved_by_chairman': 'У бухгалтера',
+        'rejected_by_chairman': 'Отклонено',
+        'awaiting_payment': 'У бухгалтера',
+        'paid': 'Выплачено',
+    }
     status_counts = (
         Request.objects
         .values('status')
         .annotate(count=Count('id'))
     )
     status_dict = {item['status']: item['count'] for item in status_counts}
+    category_counts = defaultdict(int)
+    for status, count in status_dict.items():
+        category = STATUS_CATEGORIES.get(status)
+        if category:
+            category_counts[category] += count
+    CATEGORY_ORDER = [
+        'У специалиста',
+        'У директора',
+        'У председателя',
+        'У бухгалтера',
+        'Отклонено',
+        'Выплачено',
+    ]
     status_data = [
         {
-            "code": code,
-            "title": title,
-            "count": status_dict.get(code, 0)
+            "title": category,
+            "count": category_counts.get(category, 0)
         }
-        for code, title in REQUEST_STATUSES
+        for category in CATEGORY_ORDER
     ]
 
     context.update({
