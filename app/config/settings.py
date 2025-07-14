@@ -351,7 +351,10 @@ UNFOLD = {
                         "title": _("Список заявок"),
                         "icon": "description",  # или любой другой подходящий икон
                         "link": reverse_lazy("admin:crm_request_changelist"),
-                        "active": lambda request: "status__exact" not in request.GET,
+                        "active": lambda request: (
+                            "status__exact" not in request.GET
+                            and request.path.startswith(str(reverse_lazy("admin:crm_request_changelist")))
+                        ),
                     },
                     {
                         "title": _("Мои заявки"),
