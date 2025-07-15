@@ -27,15 +27,15 @@
                         {% endcomponent %}
 
                         {% if status.title == 'Отклонено' %}
-                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-red-500 dark:text-red-500" %}
+                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-red-700 dark:text-red-400" %}
                                 {{ status.count }}
                             {% endcomponent %}
                         {% elif status.title == 'Выплачено' %}
-                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-primary-500 dark:text-primary-500" %}
+                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-green-700 dark:text-green-400" %}
                                 {{ status.count }}
                             {% endcomponent %}
                         {% else %}
-                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-base-600" %}
+                            {% component "unfold/components/title.html" with class="text-2xl font-bold mt-1 text-blue-300 dark:text-blue-400" %}
                                 {{ status.count }}
                             {% endcomponent %}
                         {% endif %}
