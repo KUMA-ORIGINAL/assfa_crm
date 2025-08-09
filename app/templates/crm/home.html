@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Центр «Ас-Сафа» - Подача заявки на благотворительность</title>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-100 py-8 px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+          <div class="bg-gradient-to-r from-emerald-600 to-teal-600 px-8 py-8">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                <i data-lucide="Heart" class="w-8 h-8 text-white"></i>
+              </div>
+              <div>
+                <h1 class="text-4xl font-bold text-white">Центр «Ас-Сафа»</h1>
+                <p class="text-emerald-100 text-lg mt-2">
+                  😊 Подача заявки на благотворительную помощь
+                </p>
+              </div>
+            </div>
+          </div>
+          <form class="p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div class="space-y-6">
+                <div class="space-y-3">
+                  <label for="nameOrOrganization" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="User" class="w-4 h-4 text-emerald-600"></i>
+                    <span>ФИО или название учреждения <span class="text-red-500">*</span></span>
+                  </label>
+                  <input type="text" id="nameOrOrganization" name="nameOrOrganization"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 border-gray-200 focus:border-emerald-500"
+                    placeholder="Асанов Асан Усонович или ООО 'Компания'" />
+                </div>
+                <div class="space-y-3">
+                  <label for="subjectType" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="Building" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Тип субъекта <span class="text-red-500">*</span></span>
+                  </label>
+                  <select id="subjectType" name="subjectType"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 border-gray-200 focus:border-emerald-500">
+                    <option value="">Выберите тип субъекта</option>
+                    <option value="individual">👤 Физическое лицо</option>
+                    <option value="organization">🏢 Юридическое лицо</option>
+                  </select>
+                </div>
+                <div class="space-y-3">
+                  <label for="applicationType" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="Heart" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Тип заявки <span class="text-red-500">*</span></span>
+                  </label>
+                  <select id="applicationType" name="applicationType"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 border-gray-200 focus:border-emerald-500">
+                    <option value="">Выберите тип заявки</option>
+                    <option value="material">💰 Материальная помощь</option>
+                    <option value="medical">🏥 Медицинская помощь</option>
+                    <option value="organization">🏢 Помощь организации</option>
+                  </select>
+                </div>
+                <div class="space-y-3">
+                  <label for="phone" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="Phone" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Номер телефона <span class="text-red-500">*</span></span>
+                  </label>
+                  <input type="tel" id="phone" name="phone"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 border-gray-200 focus:border-emerald-500"
+                    placeholder="+996 (555) 123-456" />
+                </div>
+              </div>
+              <div class="space-y-6">
+                <div class="space-y-3">
+                  <label for="actualAddress" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="MapPin" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Фактический адрес проживания <span class="text-red-500">*</span></span>
+                  </label>
+                  <textarea id="actualAddress" name="actualAddress" rows="3"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 resize-none border-gray-200 focus:border-emerald-500"
+                    placeholder="г. Бишкек, ул. Чуй, д. 123, кв. 45"></textarea>
+                </div>
+                <div class="space-y-3">
+                  <label for="registrationAddress" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="MapPin" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Адрес прописки <span class="text-red-500">*</span></span>
+                  </label>
+                  <textarea id="registrationAddress" name="registrationAddress" rows="3"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 resize-none border-gray-200 focus:border-emerald-500"
+                    placeholder="г. Ош, ул. Ленина, д. 67, кв. 12"></textarea>
+                </div>
+                <div class="space-y-3">
+                  <label for="bankDetails" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                    <i data-lucide="CreditCard" class="w-4 h-4 text-emerald-600"></i>
+                    <span>Банковские реквизиты <span class="text-red-500">*</span></span>
+                  </label>
+                  <textarea id="bankDetails" name="bankDetails" rows="3"
+                    class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 resize-none border-gray-200 focus:border-emerald-500"
+                    placeholder="Номер карты: 4169 5851 1234 5678&#10;Банк: Демир Банк&#10;Получатель: Асанов А.А."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 space-y-3">
+              <label for="situationDescription" class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                <i data-lucide="FileText" class="w-4 h-4 text-emerald-600"></i>
+                <span>Описание ситуации <span class="text-red-500">*</span></span>
+              </label>
+              <textarea id="situationDescription" name="situationDescription" rows="5"
+                class="w-full px-4 py-3 border-2 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-emerald-100 resize-none border-gray-200 focus:border-emerald-500"
+                placeholder="Подробно опишите вашу ситуацию и причину обращения за помощью в центр «Ас-Сафа»..."></textarea>
+            </div>
+            <div class="mt-8 space-y-4">
+              <label class="flex items-center space-x-2 text-sm font-semibold text-gray-700">
+                <i data-lucide="Upload" class="w-4 h-4 text-emerald-600"></i>
+                <span>📎 Приложения (фото документов)</span>
+              </label>
+              <div class="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200 border-gray-300 hover:border-emerald-400 hover:bg-emerald-50">
+                <i data-lucide="Upload" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
+                <p class="text-gray-600 mb-2">
+                  📁 Перетащите файлы сюда или нажмите для выбора
+                </p>
+                <p class="text-sm text-gray-500">
+                  Максимальный размер файла: 10MB<br />
+                  Рекомендуется: паспорт КР, справки, документы о доходах
+                </p>
+                <input type="file" multiple accept="image/*,.pdf,.doc,.docx" class="hidden" />
+              </div>
+              <!-- Список файлов будет реализован на бэке/фронте -->
+            </div>
+            <div class="mt-10">
+              <button type="submit"
+                class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-200 hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-4 focus:ring-emerald-100 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]">
+                <span class="flex items-center justify-center space-x-2">
+                  <i data-lucide="Send" class="w-5 h-5"></i>
+                  <span>💌 Отправить заявку в центр «Ас-Сафа»</span>
+                </span>
+              </button>
+            </div>
+            <div class="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+              <p class="text-sm text-emerald-700 text-center">
+                ℹ️ <strong>Обратите внимание:</strong> Все поля, отмеченные звездочкой (*), обязательны для заполнения.
+                Ваша заявка будет рассмотрена в течение 3-5 рабочих дней.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      if (window.lucide) lucide.createIcons();
+    </script>
+  </body>
+</html>

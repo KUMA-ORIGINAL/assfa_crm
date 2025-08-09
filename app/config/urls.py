@@ -23,6 +23,8 @@ from django.contrib.auth import views as auth_views
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+from crm.views import home
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -30,6 +32,7 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 
     path('api/', include('crm.urls')),
+    path('', home, name='home'),
 ]
 
 if settings.DEBUG:
